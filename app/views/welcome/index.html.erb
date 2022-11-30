@@ -1,0 +1,6 @@
+<h1>Let's join the game!</h1>
+
+<%= form_with url: redirect_path do |form| %>
+ <%= form.text_field :new %>
+ <%= form.submit 'Send' %>
+<% end %>
