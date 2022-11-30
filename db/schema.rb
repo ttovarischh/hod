@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_30_220415) do
+ActiveRecord::Schema.define(version: 2022_11_30_222910) do
 
   create_table "games", force: :cascade do |t|
     t.string "code"
@@ -18,7 +18,16 @@ ActiveRecord::Schema.define(version: 2022_11_30_220415) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.boolean "fight", default: false
     t.index ["slug"], name: "index_games_on_slug", unique: true
+  end
+
+  create_table "monsters", force: :cascade do |t|
+    t.string "name"
+    t.integer "initiative"
+    t.integer "hp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "players", force: :cascade do |t|

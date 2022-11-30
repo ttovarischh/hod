@@ -9,6 +9,18 @@
   <%== @qr.as_svg %>
 </p>
 
+<p>Бьемся? <%= @game.fight %></p>
+
+<%= form_with(model: @game, local: true) do |form| %>
+  <div class="check">
+    <%= form.label :fight %><br />
+    <%= form.check_box :fight %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
 <p>
   <strong>Name:</strong>
   <%= @game.name %>
