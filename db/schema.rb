@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_30_184831) do
+ActiveRecord::Schema.define(version: 2022_11_30_220415) do
 
   create_table "games", force: :cascade do |t|
     t.string "code"
@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(version: 2022_11_30_184831) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["slug"], name: "index_games_on_slug", unique: true
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "name"
+    t.integer "initiative"
+    t.integer "hp"
+    t.string "languages"
+    t.string "perc"
+    t.string "inv"
+    t.string "ins"
+    t.integer "armor"
+    t.boolean "conc", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "game_id"
+    t.index ["game_id"], name: "index_players_on_game_id"
   end
 
 end

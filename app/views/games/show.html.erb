@@ -14,5 +14,77 @@
   <%= @game.name %>
 </p>
 
+<h2>Add a player:</h2>
+<%= form_for([@game, @game.players.build]) do |f| %>
+	<div class="field">
+		<%= f.label :name %><br />
+		<%= f.text_field :name %>
+	</div>
+  <div class="field">
+		<%= f.label :languages %><br />
+		<%= f.text_area :languages %>
+	</div>
+	<div class="field">
+		<%= f.label :hp %><br />
+		<%= f.number_field :hp %>
+	</div>
+  <div class="field">
+		<%= f.label :PassivePerc %><br />
+		<%= f.text_field :perc %>
+	</div>
+  <div class="field">
+		<%= f.label :PassiveInv %><br />
+		<%= f.text_field :inv %>
+	</div>
+  <div class="field">
+		<%= f.label :PassiveIns %><br />
+		<%= f.text_field :ins %>
+	</div>
+  <div class="field">
+		<%= f.label :armor %><br />
+		<%= f.number_field :armor %>
+	</div>
+  <div class="check">
+    <%= f.label :conc %><br />
+    <%= f.check_box :conc %>
+  </div>
+  <div class="actions">
+		<%= f.submit %>
+	</div>
+<% end %>
+
+<h2>Players in Game</h2>
+<% @game.players.each do |player| %>
+	<p>
+		<b>Name:</b>
+		<%= player.name %>
+	</p>
+	<p>
+		<b>HP:</b>
+		<%= player.hp %>
+	</p>
+  <p>
+		<b>languages:</b>
+		<%= player.languages %>
+	</p>
+  <p>
+		<b>PassivePerc:</b>
+		<%= player.perc %>
+	</p>
+  <p>
+		<b>PassiveInv:</b>
+		<%= player.inv %>
+	</p>
+  <p>
+		<b>PassiveIns:</b>
+		<%= player.ins %>
+	</p>
+  <p>
+		<b>armor:</b>
+		<%= player.armor %>
+	</p>
+  <p>Monster <%= player.conc %></p>
+<% end %>
+
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

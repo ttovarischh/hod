@@ -3,4 +3,5 @@ class Game < ApplicationRecord
     def to_param
         code
     end
+    has_many :players
 end

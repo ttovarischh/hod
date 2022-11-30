@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'welcome/index'
-  resources :games
+  resources :games do
+    resources :players
+  end
   get 'games/index'
 
   post "", to: "welcome#redirect", as: :redirect
