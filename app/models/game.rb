@@ -4,4 +4,5 @@ class Game < ApplicationRecord
         code
     end
     has_many :players
+    has_many :monsters
 end

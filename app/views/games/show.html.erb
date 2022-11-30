@@ -11,16 +11,6 @@
 
 <p>Бьемся? <%= @game.fight %></p>
 
-<%= form_with(model: @game, local: true) do |form| %>
-  <div class="check">
-    <%= form.label :fight %><br />
-    <%= form.check_box :fight %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
 <p>
   <strong>Name:</strong>
   <%= @game.name %>
@@ -95,7 +85,44 @@
 		<b>armor:</b>
 		<%= player.armor %>
 	</p>
-  <p>Monster <%= player.conc %></p>
+  <p>Непонятное говно? <%= player.conc %></p>
+<% end %>
+
+<% if @game.fight == true %>
+  <h2>Add a monster:</h2>
+  <%= form_for([@game, @game.monsters.build]) do |f| %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :hp %><br />
+      <%= f.number_field :hp %>
+    </div>
+    <div class="field">
+      <%= f.label :initiative %><br />
+      <%= f.number_field :initiative %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+  <h2>Monsters in Game</h2>
+  <% @game.monsters.each do |monster| %>
+    <p>
+      <b>Name:</b>
+      <%= monster.name %>
+    </p>
+    <p>
+      <b>HP:</b>
+      <%= monster.hp %>
+    </p>
+    <p>
+      <b>initiative:</b>
+      <%= monster.initiative %>
+    </p>
+  <% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |

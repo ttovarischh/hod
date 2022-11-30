@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   resources :games do
     resources :players
+    resources :monsters
   end
   get 'games/index'
 
