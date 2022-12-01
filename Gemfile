@@ -7,6 +7,11 @@ gem 'rqrcode'
 
 gem "friendly_id", "~> 4.0.0.beta8"
 
+gem 'carrierwave', '~> 2.0'
+
+gem 'activestorage'
+gem "image_processing", ">= 1.2"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 # Use sqlite3 as the database for Active Record

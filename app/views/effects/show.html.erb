@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag(@effect.image.url, alt: 'Image') if @effect.image? %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @effect.name %>
+</p>
+
+<p>
+  <strong>Descr:</strong>
+  <%= @effect.descr %>
+</p>
+
+<%= link_to 'Edit', edit_effect_path(@effect) %> |
+<%= link_to 'Back', effects_path %>
