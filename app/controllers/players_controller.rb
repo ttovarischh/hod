@@ -4,4 +4,8 @@ class PlayersController < ApplicationController
 		@player = @game.players.create(params[:player].permit(:name, :hp, :initiative, :languages, :perc, :inv, :ins, :armor, :conc))
 		redirect_to game_path(@game)
 	end
+	def index
+		@player = @game.players.create(params[:player].permit(:name, :hp, :initiative, :languages, :perc, :inv, :ins, :armor, :conc))
+		render json: @player
+	end
 end

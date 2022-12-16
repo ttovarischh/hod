@@ -9,10 +9,16 @@ class GamesController < ApplicationController
   # GET /games or /games.json
   def index
     @games = Game.all
+    render json: @games, include: [:players]
   end
 
   # GET /games/1 or /games/1.json
   def show
+    # @game = Game.find_by_slug(params[:code])
+    # @game = Game.all
+    @game = set_game
+
+    render json: @game, include: [:players]
     @qr = RQRCode::QRCode.new(game_url)
   end
 
@@ -71,7 +77,8 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find_by_slug(params[:code])
+      # @game = Game.find_by_slug(params[:code])
+      @game = Game.find_by_code(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -4,10 +4,12 @@ class EffectsController < ApplicationController
   # GET /effects or /effects.json
   def index
     @effects = Effect.all
+    render json: @effects
   end
 
   # GET /effects/1 or /effects/1.json
   def show
+    render json: @effect
   end
 
   # GET /effects/new
