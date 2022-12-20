@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_01_004504) do
+ActiveRecord::Schema.define(version: 2022_12_20_100558) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,7 +48,10 @@ ActiveRecord::Schema.define(version: 2022_12_01_004504) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.boolean "fight", default: false
+    t.integer "turn", default: 0
+    t.integer "user_id"
     t.index ["slug"], name: "index_games_on_slug", unique: true
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "monsters", force: :cascade do |t|
@@ -59,6 +62,15 @@ ActiveRecord::Schema.define(version: 2022_12_01_004504) do
     t.datetime "updated_at", null: false
     t.integer "game_id"
     t.index ["game_id"], name: "index_monsters_on_game_id"
+  end
+
+  create_table "player_effects", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "effect_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["effect_id"], name: "index_player_effects_on_effect_id"
+    t.index ["player_id"], name: "index_player_effects_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -75,6 +87,20 @@ ActiveRecord::Schema.define(version: 2022_12_01_004504) do
     t.datetime "updated_at", null: false
     t.integer "game_id"
     t.index ["game_id"], name: "index_players_on_game_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "avatar"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

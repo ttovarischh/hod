@@ -4,12 +4,13 @@ PREFACE_SIZE = 2
 SUFFIX_SIZE  = 3
 
 class GamesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_game, only: %i[ show edit update destroy ]
 
   # GET /games or /games.json
   def index
     @games = Game.all
-    render json: @games, include: [:players]
+    render json: @games, include: [:players, :monsters]
   end
 
   # GET /games/1 or /games/1.json
@@ -18,7 +19,7 @@ class GamesController < ApplicationController
     # @game = Game.all
     @game = set_game
 
-    render json: @game, include: [:players]
+    render json: @game, include: [:players, :monsters]
     @qr = RQRCode::QRCode.new(game_url)
   end
 
@@ -38,7 +39,7 @@ class GamesController < ApplicationController
 
   # POST /games or /games.json
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(game_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @game.save
@@ -79,10 +80,11 @@ class GamesController < ApplicationController
     def set_game
       # @game = Game.find_by_slug(params[:code])
       @game = Game.find_by_code(params[:id])
+      # @game = Game.find_by(code: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:code, :name, :fight)
+      params.require(:game).permit(:code, :name, :fight, :user_id, :turn)
     end
 end
